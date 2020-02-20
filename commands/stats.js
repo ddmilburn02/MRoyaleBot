@@ -8,6 +8,12 @@ module.exports = {
 	execute(message, args) {
         if (!args.length) return message.reply('please specify a username.');
         if (args.length > 1) return message.reply('too many arguments');
+        try {
+            fetch(`https://mroyale.cyuubi.xyz/api/account?username=${args[0]}`)
+            .then(res => res.json());
+        } catch {
+            return message.reply('an error occured.');
+        }
             fetch(`https://mroyale.cyuubi.xyz/api/account?username=${args[0]}`)
             .then(res => res.json())
             .then(json => {
